@@ -11,9 +11,8 @@ fn main() {
     let connection = establish_connection();
     let results = posts.filter(published.eq(true))
         .limit(5)
-        .load(&connection)
-        .expect("Error loading posts")
-        .collect::<Vec<Post>>();
+        .load::<Post>(&connection)
+        .expect("Error loading posts");
 
     println!("Displaying {} posts", results.len());
     for post in results {
